@@ -4,5 +4,5 @@ file {'0-create_a_file':
   owner   => 'www-data',
   group   => 'www-data',
   mode    => '0744',
-  Content => 'I love Puppet',
+  content => 'I love Puppet',
 }
