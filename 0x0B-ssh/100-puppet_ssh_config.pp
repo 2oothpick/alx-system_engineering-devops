@@ -1,3 +1,4 @@
+# setting up passwd auth and identityfile
 include stdlib
 
 file_line { 'Turn off password auth':
