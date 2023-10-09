@@ -1,1 +1,1 @@
-this is the second network vasics directory
+this is the second network basics directory
