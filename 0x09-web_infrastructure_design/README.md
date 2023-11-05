@@ -1,0 +1,2 @@
+# Web_infrastructure_design
+Often referred to as web architecture design is the process of planning and creating the foundational structure and components that support web applicatioons, websites and online services. It encompasses the architecture, hardware, software, networks and configurations necessary to ensure the reliability, scalability, security and performance of web-obased systems.
