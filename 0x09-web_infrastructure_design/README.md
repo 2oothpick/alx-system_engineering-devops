@@ -57,3 +57,17 @@ Issues with the infrastructure:
 * Traffic is unencrypted.
 
 * there is no Monitoring
+
+### [2-secured_and_monitored](https://github.com/2oothpick/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/2-secured_and_monitored_web_infrastructure)
+For this task i added three firewalls, one for each server and the last one to the load balancer to filter network traffic.
+
+Addes SSL to encrypt traffic so it can't be read if intercepted.
+
+A monitoring system (DataDog) to check for any anomalies. It comprises of a client collecting data and sending it to the monitoring sytem, and triggers an alert if QPS is getting out of control.
+
+Issues with the infrastructure:
+* Terminating SSL at the load balancer level is an issue  because the traffic between the load balancer and the web servers is unencrypted.
+
+* Having only one MySQL server accepting writes is an issue because if the master unexplicably becomes unavailable, the application would not be able to write to the database anymore.
+
+* Having servers with all the same components (database, web server and application server) might be a problem because when there is maintenance performed on a server for a specific component, it will affect other components that are on it.
