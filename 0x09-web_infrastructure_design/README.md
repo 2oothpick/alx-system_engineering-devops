@@ -31,3 +31,13 @@ Planning for scalability and the ability to handle increase traffic and growing 
 
 ### High Availability:
 Ensuring high availability and minimizing downtime through failover mechanisms, load balancing, and resilient system architecture.
+
+
+## Tast details
+### [0-simple_web_stack ](https://github.com/2oothpick/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/0-simple_web_stack "github"):
+![Imgur](https://imgur.com/VK39gaC)
+Issues with the infrastructure:
+* DNS has only one name server and this is a single point of failure.
+* Since there is only one server, the website would be temporarily down when new code is deployed and the web server needs to be restarted.
+* This infrastructure cannot scale and will not be able to handle traffic exceeding the server's capacity.
+
