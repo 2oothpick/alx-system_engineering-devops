@@ -71,3 +71,11 @@ Issues with the infrastructure:
 * Having only one MySQL server accepting writes is an issue because if the master unexplicably becomes unavailable, the application would not be able to write to the database anymore.
 
 * Having servers with all the same components (database, web server and application server) might be a problem because when there is maintenance performed on a server for a specific component, it will affect other components that are on it.
+
+## [3-scale_up](https://github.com/2oothpick/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/3-scale_up)
+For this project, i added another server cluster(passive cluster) as a failover mechanism, should the active cluster become unavailable.
+
+The databases in the active cluster are both masters(ie: they can both write data) should the other server in the active cluster become unavailable, the application would still be able to write to the database.
+The databases in the passive cluster are both replicas, ie: they only read data. This is for synchronization
+
+SSL is terminated at both the load balancer and server level, encrypting internal traffic
