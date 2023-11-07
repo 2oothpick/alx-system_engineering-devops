@@ -6,9 +6,9 @@ Often referred to as web architecture design is the process of planning and crea
  ### Servers and Hosting: 
 A server is a piece of computer hardware or software that provides functionality for other programs or devices. Servers can be physical or virtual as in the case of cloud hosting. since servers are computers, they run an OS. some of the more popular ones are Linux and Windows. Servers are located in data centers. Servers can serve various functions, but for this project, we would be looking at servers as web servers and application servers.
     
-    * Web server: web servers just act as HTTP servers, receiving HTTP requests and sending HTTP responses allowing users to access hosted files. popular examples include NGINX and Apache.
+* Web server: web servers just act as HTTP servers, receiving HTTP requests and sending HTTP responses allowing users to access hosted files. popular examples include NGINX and Apache.
    
-    * Application servers: this is a server-side software platform designed to host and run web-based applications and provides a runtime environment for applications and business logic. They are usually used in conjunction with a database and a web server to deliver dynamic content on dynamic websites. Popular examples include Apache TomEE and Oracle.
+* Application servers: this is a server-side software platform designed to host and run web-based applications and provides a runtime environment for applications and business logic. They are usually used in conjunction with a database and a web server to deliver dynamic content on dynamic websites. Popular examples include Apache TomEE and Oracle.
 
 ### Databases:
  This is a collection of data for our website. We select a database management system (DBMS), database schema design, and replication strategies to manage data for our web application. Popular DBMSs include MySQL.
