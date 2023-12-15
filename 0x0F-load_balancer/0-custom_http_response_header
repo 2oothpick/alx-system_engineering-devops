@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script installs nginx and configures it to listen on port 80
+# sets up a server block
+# sets a custom response header
+
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo chown -R $USER:$USER /var/www/html
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+sudo sed -i "24i \\\tadd_header X-Served-by $(hostname);" /etc/nginx/sites-available/default
+sudo service nginx start
