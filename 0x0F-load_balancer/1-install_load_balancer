@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Installs and configures HAProxy
 
-apt-get install --no-install-recommends software-properties-common
-add-apt-repository ppa:vbernat/haproxy-2.8
-apt-get install haproxy=2.8.\*
+apt-get install -y --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.8
+sudo apt-get -y update
+apt-get install -y haproxy=2.8.\*
 
 # Enabling init script
 echo "ENABLED=1" > /etc/default/haproxy
