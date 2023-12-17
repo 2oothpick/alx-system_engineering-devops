@@ -24,4 +24,4 @@ echo "
 	server 69177-web-02 35.153.79.82:80 check
 " >> /etc/haproxy/haproxy.cfg
 
-sudo service haproxy restart
+sudo service haproxy start
