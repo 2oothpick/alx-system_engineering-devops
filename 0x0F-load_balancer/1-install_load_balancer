@@ -10,16 +10,21 @@ sudo apt-get install -y haproxy=2.0.\*
 echo "ENABLED=1" > /etc/default/haproxy
 
 # Creating a copy of HAProxy's config file
-# cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
 
 # configuring to load balance web1 and web2 servers
 echo "
-	listen load_balancer
-	bind *:80
-	mode http
-	balance roundrobin
-	server 69177-web-01 100.25.162.172:80 check
-	server 69177-web-02 35.153.79.82:80 check
+	frontend myfrontend
+		bind *:80
+		option httpclose
+		option httplog
+		option forwardfor
+		default_backend mybackend
+	backend mybackend
+		mode http
+		balance roundrobin
+		server 69177-web-01 100.25.162.172:80 check
+		server 69177-web-02 35.153.79.82:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy start
