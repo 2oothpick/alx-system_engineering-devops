@@ -14,6 +14,7 @@ echo "ENABLED=1" > /etc/default/haproxy
 
 # configuring to load balance web1 and web2 servers
 echo "
+	listen load_balancer
 	bind *:80
 	mode http
 	balance roundrobin
