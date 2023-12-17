@@ -10,7 +10,7 @@ apt-get install -y haproxy=2.8.\*
 echo "ENABLED=1" > /etc/default/haproxy
 
 # Creating a copy of HAProxy's config file
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
+# cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
 
 # configuring to load balance web1 and web2 servers
 echo "
