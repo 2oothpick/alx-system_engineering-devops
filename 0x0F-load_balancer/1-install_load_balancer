@@ -15,9 +15,6 @@ cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
 # configuring to load balance web1 and web2 servers
 echo "
 	bind *:80
-	option httpclose
-	option httplog
-	option forwardfor
 	mode http
 	balance roundrobin
 	server 69177-web-01 100.25.162.172:80 check
