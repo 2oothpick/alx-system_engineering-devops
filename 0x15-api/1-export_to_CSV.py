@@ -26,7 +26,7 @@ if __name__ == "__main__":
         for tasks in all_tasks_json:
             task_counter += 1
 
-            csv_list = [argv[1], user_info_json['name'],
+            csv_list = [argv[1], user_info_json['username'],
                         tasks["completed"], tasks['title']]
             # print(csv_list)
             csv_file = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
