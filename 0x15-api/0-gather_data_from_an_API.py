@@ -4,30 +4,28 @@ Script uses a given employee ID, and  returns
 information about his/her TODO list progress
 """
 
-import requests
-from sys import argv
-
-
 if __name__ == "__main__":
-    sessrequest = requests.Session()
-    idEmp = argv[1]
-    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idEmp)
-    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(idEmp)
+    import requests
+    from sys import argv
+    import json
+    tasks_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}/todos"
+    user_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
+    # response = requests.get(todos_url)
+    username = requests.get(user_url)
+    username_json = json.loads(username.text)
+    all_tasks = requests.get(tasks_url)
+    all_tasks_json = json.loads(all_tasks.text)
+    task_counter = 0
+    completed_counter = 0
+    task_titles = []
+    for tasks in all_tasks_json:
+        task_counter += 1
 
-    emp = sessrequest.get(idURL)
-    empName = sessrequest.get(nameURL)
+        if tasks["completed"]:
+            completed_counter += 1
+            task_titles.append(tasks["title"])
 
-    json_req = emp.json()
-    name = empName.json()['name']
-
-    tasks = 0
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            tasks += 1
-
-    print("Employee {} is done with tasks({}/{}):".
-          format(name, tasks, len(json_req)))
-
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            print("\t " + done_tasks.get('title'))
+    print(
+        f"{username_json['name']} is done with ({completed_counter}/{task_counter}):")
+    for item in task_titles:
+        print(f"\t {item}")
