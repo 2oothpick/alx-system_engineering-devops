@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-Script uses a given employee ID, and  returns
+Script uses a given employee ID, and exports
 information about his/her TODO list progress
-and exports data in the CSV format.
+CSV format.
 """
 
 if __name__ == "__main__":
