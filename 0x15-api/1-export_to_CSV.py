@@ -5,33 +5,29 @@ information about his/her TODO list progress
 and exports data in the CSV format.
 """
 
-
-import csv
-import requests
-from sys import argv
-
-
 if __name__ == "__main__":
-    sessrequest = requests.Session()
-    idEmp = argv[1]
-    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idEmp)
-    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(idEmp)
+    import csv
+    import json
+    import requests
+    from sys import argv
 
-    employee = sessrequest.get(idURL)
-    employeeName = sessrequest.get(nameURL)
+    tasks_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}/todos"
+    user_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
+    # response = requests.get(todos_url)
+    user_info = requests.get(user_url)
+    user_info_json = json.loads(user_info.text)
+    all_tasks = requests.get(tasks_url)
+    all_tasks_json = json.loads(all_tasks.text)
+    task_counter = 0
+    completed_counter = 0
+    task_titles = []
+    filename = f"{argv[1]}.csv"
+    with open(filename, 'w', newline='') as file:
+        for tasks in all_tasks_json:
+            task_counter += 1
 
-    json_req = employee.json()
-    usr = employeeName.json()['username']
-
-    totalTasks = 0
-
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            totalTasks += 1
-
-    fileCSV = idEmp + '.csv'
-
-    with open(fileCSV, "w", newline='') as csvfile:
-        write = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
-        for i in json_req:
-            write.writerow([idEmp, usr, i.get('completed'), i.get('title')])
+            csv_list = [argv[1], user_info_json['name'],
+                        tasks["completed"], tasks['title']]
+            # print(csv_list)
+            csv_file = csv.writer(file)
+            csv_file.writerow(csv_list)
