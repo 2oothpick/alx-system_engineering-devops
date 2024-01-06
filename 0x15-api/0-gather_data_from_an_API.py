@@ -5,9 +5,9 @@ information about his/her TODO list progress
 """
 
 if __name__ == "__main__":
-    from sys import argv
     import json
     import requests
+    from sys import argv
 
     tasks_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}/todos"
     user_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
