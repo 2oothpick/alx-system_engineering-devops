@@ -26,8 +26,7 @@ if __name__ == "__main__":
             completed_counter += 1
             task_titles.append(tasks["title"])
 
-    print(
-        f"Employee {username_json['name']} is done with tasks\
-        ({completed_counter}/{task_counter}):")
+    print("Employee {} is done with\
+           tasks({}/{}):".format(username_json, completed_counter, task_counter))
     for item in task_titles:
         print(f"\t {item}")
