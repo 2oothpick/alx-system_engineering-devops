@@ -29,5 +29,5 @@ if __name__ == "__main__":
             csv_list = [argv[1], user_info_json['name'],
                         tasks["completed"], tasks['title']]
             # print(csv_list)
-            csv_file = csv.writer(file)
+            csv_file = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
             csv_file.writerow(csv_list)
