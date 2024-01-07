@@ -5,35 +5,29 @@ information about his/her TODO list progress
 and exports data in the JSON format.
 """
 
-import json
-import requests
-from sys import argv
-
 
 if __name__ == "__main__":
-    sessrequest = requests.Session()
-    idEmp = argv[1]
-    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idEmp)
-    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(idEmp)
+    import json
+    import requests
+    from sys import argv
 
-    employee = sessrequest.get(idURL)
-    employeeName = sessrequest.get(nameURL)
+    tasks_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}/todos"
+    user_url = f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
 
-    json_req = employee.json()
-    usr = employeeName.json()['username']
+    user_info = requests.get(user_url)
+    all_tasks = requests.get(tasks_url)
 
-    totalTasks = []
-    updateUser = {}
+    user_info_json = json.loads(user_info.text)
+    all_tasks_json = json.loads(all_tasks.text)
 
-    for all_Emp in json_req:
-        totalTasks.append(
-            {
-                "task": all_Emp.get('title'),
-                "completed": all_Emp.get('completed'),
-                "username": usr,
-            })
-    updateUser[idEmp] = totalTasks
-
-    file_Json = idEmp + ".json"
-    with open(file_Json, 'w') as f:
-        json.dump(updateUser, f)
+    task_titles = []
+    filename = f"{argv[1]}.json"
+    task_list = []
+    json_dict = {f"{argv[1]}": task_list}
+    with open(filename, 'w', newline='') as file:
+        for tasks in all_tasks_json:
+            task_list.append({"task": tasks['title'],
+                              "completed": tasks.get('completed'),
+                              "username": user_info_json["username"]
+                              })
+        json.dump(json_dict, file)
