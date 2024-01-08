@@ -1,31 +1,31 @@
 #!/usr/bin/python3
 """
-Script uses a given employee ID, and  returns
-information about his/her TODO list progress
-and exports data in the CSV format.
+Script returns all information about users
+TODO list progress
+and exports data in the json format.
 """
 
-import json
-import requests
-from sys import argv
-
-
 if __name__ == "__main__":
-    users = requests.get("https://jsonplaceholder.typicode.com/users")
-    users = users.json()
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    todos = todos.json()
-    todoAll = {}
+    import json
+    import requests
 
-    for user in users:
-        taskList = []
-        for task in todos:
-            if task.get('userId') == user.get('id'):
-                taskDict = {"username": user.get('username'),
-                            "task": task.get('title'),
-                            "completed": task.get('completed')}
-                taskList.append(taskDict)
-        todoAll[user.get('id')] = taskList
+    tasks_url = f"https://jsonplaceholder.typicode.com/todos"
+    user_url = f"https://jsonplaceholder.typicode.com/users"
 
-    with open('todo_all_employees.json', mode='w') as f:
-        json.dump(todoAll, f)
+    user_info_json = json.loads(requests.get(user_url).text)
+    all_tasks_json = json.loads(requests.get(tasks_url).text)
+
+    filename = "todo_all_employees.json"
+    json_dict = {}
+
+    with open(filename, 'w', newline='') as file:
+        for user in user_info_json:
+            task_list = []
+            json_dict.update({user['id']: task_list})
+            for tasks in all_tasks_json:
+                if user['id'] == tasks['userId']:
+                    task_list.append({"username": user["username"],
+                                      "task": tasks['title'],
+                                      "completed": tasks.get('completed')
+                                      })
+        json.dump(json_dict, file)
