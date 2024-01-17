@@ -8,7 +8,7 @@ for a given subredit
 import requests
 
 
-def number_of_subscriber(subreddit):
+def number_of_subscribers(subreddit):
     """
     Queries Redit api
     """
