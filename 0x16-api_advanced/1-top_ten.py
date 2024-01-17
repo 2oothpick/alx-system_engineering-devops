@@ -12,13 +12,16 @@ def top_ten(subreddit):
     """
     Queries Redit API
     """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     req = requests.get(
-        url, header={"User-Agent": "Custom"}, params={"limit": 10})
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={"User-Agent": "Custom"},
+        params={"limit": 10},
+    )
+
     if req.status_code == 200:
         for get_data in req.json().get("data").get("children"):
-            Data = get_data("data")
-            title = Data.get("title")
+            dat = get_data.get("data")
+            title = dat.get("title")
             print(title)
-        else:
-            print(None)
+    else:
+        print(None)
